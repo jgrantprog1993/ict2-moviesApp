@@ -13,6 +13,7 @@ import StarRateIcon from "@material-ui/icons/StarRate";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -25,43 +26,61 @@ const useStyles = makeStyles({
 export default function MovieCard(props) {
   const classes = useStyles();
   const movie = props.movie;
+  const handleAddToFavourite = (e) => {
+    e.preventDefault();
+    props.selectFavourite(movie.id);
+  };
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title={movie.title} />
-      <CardMedia
-        className={classes.media}
-        image={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-            : `${process.env.PUBLIC_URL}/assets/film-poster-placeholder.png`
-        }
-      />
-      <CardContent>
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <CalendarIcon fontSize="small" />
-              {movie.release_date}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <StarRateIcon fontSize="small" />
-              {"  "} {movie.vote_average}{" "}
-            </Typography>
-          </Grid>
-        </Grid>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={null}>
-          <FavoriteIcon color="primary" fontSize="large" />
-        </IconButton>
-        <Link to={`/movies/${movie.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
-            More Info ...
-          </Button>
-        </Link>
-      </CardActions>
+        <CardHeader
+            className={classes.header}
+            avatar={
+                movie.favourite ? (
+                <Avatar className={classes.avatar}>
+                    <FavoriteIcon />
+                </Avatar>
+                ) : null
+            }
+            title={
+                <Typography variant="h5" component="p">
+                {movie.title}{" "}
+                </Typography>
+            }
+        />
+        <CardMedia
+            className={classes.media}
+            image={
+            movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                : `${process.env.PUBLIC_URL}/assets/film-poster-placeholder.png`
+            }
+        />
+        <CardContent>
+            <Grid container>
+            <Grid item xs={6}>
+                <Typography variant="h6" component="p">
+                <CalendarIcon fontSize="small" />
+                {movie.release_date}
+                </Typography>
+            </Grid>
+            <Grid item xs={6}>
+                <Typography variant="h6" component="p">
+                <StarRateIcon fontSize="small" />
+                {"  "} {movie.vote_average}{" "}
+                </Typography>
+            </Grid>
+            </Grid>
+        </CardContent>
+        <CardActions disableSpacing>
+            <IconButton aria-label="add to favourites" onClick={handleAddToFavourite}>
+                <FavoriteIcon color="primary" fontSize="large" />
+            </IconButton>
+            <Link to={`/movies/${movie.id}`}>
+            <Button variant="outlined" size="medium" color="primary">
+                More Info ...
+            </Button>
+            </Link>
+        </CardActions>
     </Card>
   );
 }
