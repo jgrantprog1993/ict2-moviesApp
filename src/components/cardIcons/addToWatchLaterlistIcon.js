@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-
+import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import { MoviesContext } from "../../contexts/moviesContext";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -12,7 +12,7 @@ const MyPlaylistAddIcon = ({movie}) => {
     }
     return (
         <IconButton aria-label="add to must watch list" onClick={handleAddToMustWatchList}>
-           
+            <PlaylistAddIcon/>
         </IconButton>
     )
 };
