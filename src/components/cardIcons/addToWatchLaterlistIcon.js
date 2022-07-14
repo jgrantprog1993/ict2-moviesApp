@@ -6,12 +6,13 @@ import IconButton from "@material-ui/core/IconButton";
 const MyPlaylistAddIcon = ({movie}) => {
     const context = useContext(MoviesContext);
 
-    const handleAddToMustWatchList = (e) => {
+    const handleWatchList = (e) => {
         e.preventDefault();
-        context.addToMustWatchList(movie);
+        context.addToWatchLater(movie);
+        console.log(context);
     }
     return (
-        <IconButton aria-label="add to must watch list" onClick={handleAddToMustWatchList}>
+        <IconButton aria-label="add to must watch list" onClick={handleWatchList}>
             <PlaylistAddIcon/>
         </IconButton>
     )

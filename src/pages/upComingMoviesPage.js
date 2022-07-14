@@ -9,7 +9,7 @@ import {  getUpcomingMovies } from "../api/tmdb-api";
 const UpcomingMoviesPage = (props) => {
   const {  data, error, isLoading, isError }  = useQuery("upcoming", getUpcomingMovies)
   
-  const addToFavourites = () => null;
+ 
   if (isLoading) {
     return <Spinner />
   }
@@ -26,7 +26,6 @@ const UpcomingMoviesPage = (props) => {
       action={(movie) => {
         return <AddToWatchLaterlistIcon movie={movie} />;
       }}
-      selectFavourite={addToFavourites}
     />
   );
 };
